@@ -1,4 +1,6 @@
 import unittest
+from ner_client import NamedEntityClient
+from test_doubles import NERModelTestDouble
 
 class TestNERClient(unittest.TestCase):
 
@@ -8,6 +10,14 @@ class TestNERClient(unittest.TestCase):
         :return:
         """
 
-        ner = NamedEntityClient()
+        model = NERModelTestDouble('eng')
+        ner = NamedEntityClient(model)
         ents = ner.get_ents("")
+        self.assertIsInstance(ents, dict)
+
+    def test_get_ents_returns_list_given_nonempty_string(self):
+
+        model = NERModelTestDouble("eng")
+        ner = NamedEntityClient(model)
+        ents = ner.get_ents("Paris is the capital of France!")
         self.assertIsInstance(ents, dict)
