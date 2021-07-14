@@ -19,6 +19,13 @@ class DocTestDouble:
     def __init__(self, sent, ents):
         self.ents = [SpanTestDouble(ent['text'], ent['label_']) for ent in ents]
 
+
+    def patch_method(self, attr, return_value):
+        def patched():
+            return return_value
+        setattr(self, attr, patched)
+        return self
+
 class SpanTestDouble():
     """
     Test double for Spacy Span
@@ -26,4 +33,4 @@ class SpanTestDouble():
 
     def __init__(self, text, label):
         self.text = text
-        self.label = label
+        self.label_ = label
