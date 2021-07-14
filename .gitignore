@@ -3,3 +3,6 @@ flaskner.egg-info/
 .idea/
 __pycache__/
 test/__pycache__/
+driver/
+geckodriver.log
+test/geckodriver.log
